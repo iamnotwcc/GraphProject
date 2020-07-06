@@ -143,7 +143,7 @@ int int_to_string(char *s, int n)
 	return result;
 }
 
-void CreateAdj(char name[])		//½¨Á¢ÁÚ½Ó±í 
+void CreateAdj(char name[])		//å»ºç«‹é‚»æ¥è¡¨ 
 {
 	FILE *fp = fopen(name, "r");
 	AdjGraph G;
@@ -162,7 +162,7 @@ void CreateAdj(char name[])		//½¨Á¢ÁÚ½Ó±í
 		p->weight = weight;
 		p->nextarc = G.adjlist[m].firstarc;
 		G.adjlist[m].firstarc = p;
-		if (flag[m] == 0) {				//ÓÃÀ´¼ÆËãµãµÄÊıÁ¿ 
+		if (flag[m] == 0) {				//ç”¨æ¥è®¡ç®—ç‚¹çš„æ•°é‡ 
 			flag[m] = 1;
 			num++;
 		}
@@ -177,7 +177,7 @@ void CreateAdj(char name[])		//½¨Á¢ÁÚ½Ó±í
 
 void Dijkstra(int v)
 {
-	int S[500000] = {0};				//SÓÃÀ´¼ÇÂ¼µãÊÇ·ñ±»ÕÒ¹ıµÄ¼ÇÂ¼
+	int S[500000] = {0};				//Sç”¨æ¥è®°å½•ç‚¹æ˜¯å¦è¢«æ‰¾è¿‡çš„è®°å½•
 	int MINdis, i, j, u;
 	for (i = 0; i < 500000; i++) {
 		if (flag[i] == 1) {
@@ -185,18 +185,18 @@ void Dijkstra(int v)
 			dist[i] = INF;
 		}
 	}
-	ArcNode *p = G.adjlist[v].firstarc;	//ÓÃÀ´Ö¸ÏòvÁÚ½Ó±íµÄµÚÒ»¸ö½áµã 
+	ArcNode *p = G.adjlist[v].firstarc;	//ç”¨æ¥æŒ‡å‘vé‚»æ¥è¡¨çš„ç¬¬ä¸€ä¸ªç»“ç‚¹ 
 	while (p != NULL) {
-		dist[p->adjvex] = p->weight;				//ÒòÎª´æÔÚÂ·¾¶£¬ËùÒÔÖ±½ÓĞŞ¸ÄdistµÄÖµ 
+		dist[p->adjvex] = p->weight;				//å› ä¸ºå­˜åœ¨è·¯å¾„ï¼Œæ‰€ä»¥ç›´æ¥ä¿®æ”¹distçš„å€¼ 
 		path[p->adjvex] = v;
 		p = p->nextarc;
 	}
-	S[v] = 1;										//ĞŞ¸ÄµÄ½áµãvµÄ¼ÇÂ¼ 
+	S[v] = 1;										//ä¿®æ”¹çš„ç»“ç‚¹vçš„è®°å½• 
 	path[v] = -1;
 	for (i = 0; i < G.n - 1; i++) {
 		MINdis = INF;
 		int count = 0;
-		for (j = 0; count != G.n; j++) {			//ÓÅÏÈ¶ÓÁĞÓÅ»¯ÕÒ×îĞ¡Â·¾¶ 
+		for (j = 0; count != G.n; j++) {			//ä¼˜å…ˆé˜Ÿåˆ—ä¼˜åŒ–æ‰¾æœ€å°è·¯å¾„ 
 			if (flag[j] == 1) {
 				if (S[j] == 0 && dist[j] < MINdis) {
 					u = j;
@@ -206,10 +206,10 @@ void Dijkstra(int v)
 			}
 		}
 		S[u] = 1;
-		p = G.adjlist[u].firstarc;		//Ö¸Ïò¸ÃµãÁÚ½Ó±íµÄµÚÒ»¸ö½áµã 
+		p = G.adjlist[u].firstarc;		//æŒ‡å‘è¯¥ç‚¹é‚»æ¥è¡¨çš„ç¬¬ä¸€ä¸ªç»“ç‚¹ 
 		while (p != NULL) {
 			if (S[p->adjvex] == 0) {
-				if (dist[u] + p->weight < dist[p->adjvex]) {	//±È½ÏµãµÄ¾àÀë²¢½øĞĞĞŞ¸Ä 
+				if (dist[u] + p->weight < dist[p->adjvex]) {	//æ¯”è¾ƒç‚¹çš„è·ç¦»å¹¶è¿›è¡Œä¿®æ”¹ 
 					dist[p->adjvex] = dist[u] + p->weight;
 					path[p->adjvex] = u;
 				}
@@ -231,7 +231,7 @@ int strcmp1(char *a)
 void shortestPath(int u, int v, char algorithm[], char name[])
 {
 	CreateAdj(name);
-	int al = strcmp(algorithm);
+	int al = strcmp1(algorithm);
 	if (al == 0) {
 		Dijkstra(u);
 		int temp[5000];
