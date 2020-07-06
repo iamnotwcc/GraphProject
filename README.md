@@ -34,8 +34,8 @@ Command Line Interface (CLI)，中文翻译是命令行交互接口。这是一�
 - 编辑 `stats.h` 和 `stats.c` 文件，完成如下函数（**2%**）：
   - `int numberOfEdges(char name[])` 接受以文件名为图标识符的 `char` 数组，返回图中边的数量
   - `int numberOfVertices(char name[])` 接受以文件名为图标识符的 `char` 数组，返回图中顶点的数量
-  - `int freemanNetworkCentrality(char name[])` 接受以文件名为图标识符的 `char` 数组，返回图中 Freeman's Network Centrality 值
-  - `int closenessCentrality(char name[])` 接受以文件名为图标识符的 `char` 数组，返回图中 Closeness Centrality 值
+  - `float freemanNetworkCentrality(char name[])` 接受以文件名为图标识符的 `char` 数组，返回图中 Freeman's Network Centrality 值
+  - `float closenessCentrality(char name[], int node)` 接受以文件名为图标识符的 `char` 数组，返回图中 Closeness Centrality 值
   - 参考 https://www.cl.cam.ac.uk/teaching/1213/L109/stna-lecture3.pdf
   - 评分标准为
 	- 前**两个**函数 + 后面两个函数中选**一个**
@@ -44,7 +44,7 @@ Command Line Interface (CLI)，中文翻译是命令行交互接口。这是一�
 
 - 将 `DFS、BFS、Dijkstra` 三个蒜法封装在 `search.h` 和 `search.c` 文件中（**3%，0.75% + 0.75% + 1.5%**）
   - 每个函数封装结构没有要求，输入输出也没有要求
-  - 需要额外加入一个函数 `int* shortestPath(int u, int v, char algorithm[])`用来评分
+  - 需要额外加入一个函数 `char* shortestPath(int u, int v, char algorithm[], char name[])`用来评分
 	- 输入两个 `int` 值，`u` 和 `v`，分别为起点与终点的顶点编号
 	- 输入一个 `char` 数组，装有所选算法的名字（分别为：`{DFS, BFS, Dijkstra}`， 请严格遵守）
 	- 输出一个 `int` 数组指针，装有从 `u` 到 `v` 的最短路径

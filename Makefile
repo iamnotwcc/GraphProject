@@ -1,8 +1,14 @@
-search-cli: main.o
-	cc -o search-cli main.o
+cc = gcc
+deps = $(shell find ./-name "*.h")
+src = $(shell find ./ -name "*.c")
+obj = $(src:%.c = %.o)
+prom = searck-cli
 
-main.o:
-	cc -c main.c search.c stats.c
+$(prom): $(obj)
+	$(cc) -o $(prom) $(obj)
+
+%.o: %.c$(deps)
+	$(cc) -c $ < -o $@
 
 clean:
-
+	rm -rf $(obj) $(prom)
